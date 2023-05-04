@@ -1,0 +1,21 @@
+/.idea/*
+/.vs/*
+/Binaries/*
+/Config - Copy/*
+/Intermediate/*
+/DerivedDataCache/*
+/Plugins/*
+
+
+/Content/*
+!/Content/Assets/
+-/Content/Assets/
+
+
+/Saved/*
+
+
+
+
+UEDemoC.sln
+UEDemoC.uproject
