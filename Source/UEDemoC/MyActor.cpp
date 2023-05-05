@@ -3,11 +3,16 @@
 
 #include "MyActor.h"
 
+#include "Components/ArrowComponent.h"
+
 // Sets default values
 AMyActor::AMyActor()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	CreateDefaultSubobject<UArrowComponent>(TEXT("Arrow"));
+	UObject* tmp = StaticLoadObject(USkeletalMesh::StaticClass(), nullptr,
+	                                TEXT("SkeletalMesh'/Game/Resources/Shooter/Characters/Models/HeroTPP.HeroTPP'"));
 }
 
 // Called when the game starts or when spawned
@@ -63,12 +68,9 @@ void AMyActor::SetTInteger(int a)
 	TInteger = a;
 }
 
-int AMyActor::TBlueprintCallable_Implementation()
+FStructParam AMyActor::TBlueprintCallable_Implementation(FStructParam param)
 {
 	FString str = "TBlueprintCallable_Implementation";
 	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, str);
-	return 0;
+	return param;
 }
-
-
-

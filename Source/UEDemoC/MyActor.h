@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/DataTable.h"
 #include "GameFramework/Actor.h"
 #include "MyActor.generated.h"
 
@@ -12,6 +13,18 @@ enum _EnumParam
 	E_1 = 0,
 	E_2,
 	E_3
+};
+
+USTRUCT(BlueprintType)
+struct FStructParam :public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FString name;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	int id;
 };
 
 
@@ -56,9 +69,10 @@ public:
 	virtual void SetTInteger(int a);
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Exec)
-	int TBlueprintCallable();
+	FStructParam TBlueprintCallable(FStructParam param);
 
 	UFUNCTION(Exec, BlueprintCallable, BlueprintImplementableEvent, meta=(DisplayName="TBlueprintImplementableEvent"),
-		Category="Func|Sub",meta=(ExpandEnumAsExecs="In_EnumParam"))
+		Category="Func|Sub")
 	int TBlueprintImplementableEvent(_EnumParam In_EnumParam);
 };
+//meta=(ExpandEnumAsExecs="In_EnumParam")
