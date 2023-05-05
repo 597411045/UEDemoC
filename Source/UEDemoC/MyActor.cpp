@@ -15,7 +15,7 @@ void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
 	FString str = "BeginPlay";
-	GEngine->AddOnScreenDebugMessage(-1, 100, FColor::Red, str);
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, str);
 }
 
 // Called every frame
@@ -28,14 +28,14 @@ void AMyActor::PreInitializeComponents()
 {
 	Super::PreInitializeComponents();
 	FString str = "PreInitializeComponents";
-	GEngine->AddOnScreenDebugMessage(-1, 100, FColor::Blue, str);
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, str);
 }
 
 void AMyActor::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 	FString str = "PostInitializeComponents123";
-	GEngine->AddOnScreenDebugMessage(-1, 100, FColor::Green, str);
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, str);
 }
 
 void AMyActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -43,12 +43,32 @@ void AMyActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
 	Super::EndPlay(EndPlayReason);
 
 	FString str = "EndPlay";
-	GEngine->AddOnScreenDebugMessage(-1, 100, FColor::Green, str);
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, str);
 }
 
 void AMyActor::BeginDestroy()
 {
 	FString str = "BeginDestroy";
-	GEngine->AddOnScreenDebugMessage(-1, 100, FColor::Green, str);
+	GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Green, str);
 	Super::BeginDestroy();
 }
+
+int AMyActor::GetTInteger()
+{
+	return TInteger;
+}
+
+void AMyActor::SetTInteger(int a)
+{
+	TInteger = a;
+}
+
+int AMyActor::TBlueprintCallable_Implementation()
+{
+	FString str = "TBlueprintCallable_Implementation";
+	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, str);
+	return 0;
+}
+
+
+
