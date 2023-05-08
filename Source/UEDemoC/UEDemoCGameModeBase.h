@@ -13,5 +13,6 @@ UCLASS()
 class UEDEMOC_API AUEDemoCGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+	virtual void StartPlay() override;
 };
