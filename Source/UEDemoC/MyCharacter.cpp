@@ -62,8 +62,8 @@ void AMyCharacter::MoveForward(float value)
 	FVector DX;
 	FVector DY;
 	FVector DZ;
-	FRotationMatrix(Controller->GetControlRotation()).GetScaledAxes(DX, DY, DZ);
-	AddMovementInput(DX, value);
+	//FRotationMatrix(Controller->GetControlRotation()).GetScaledAxes(DX, DY, DZ);
+	AddMovementInput(GetActorForwardVector(), value);
 }
 
 void AMyCharacter::MoveRight(float value)
@@ -71,8 +71,8 @@ void AMyCharacter::MoveRight(float value)
 	FVector DX;
 	FVector DY;
 	FVector DZ;
-	FRotationMatrix(Controller->GetControlRotation()).GetScaledAxes(DX, DY, DZ);
-	AddMovementInput(DY, value);
+	//FRotationMatrix(Controller->GetControlRotation()).GetScaledAxes(DX, DY, DZ);
+	AddMovementInput(GetActorRightVector(), value);
 }
 
 void AMyCharacter::StartJimp()
