@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class UEDEMOC_API AUEDemoCGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()

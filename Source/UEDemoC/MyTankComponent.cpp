@@ -34,6 +34,7 @@ void UMyTankComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                      FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	AimToTarget();
 
 	// ...
 }
@@ -50,7 +51,7 @@ void UMyTankComponent::AimAt(FVector position)
 	ProEndPositon = position;
 	if (isValid)
 	{
-		//TurnTurret();
+		TurnTurret();
 		TurnBarrel();
 	}
 }
@@ -71,7 +72,8 @@ void UMyTankComponent::TurnTurret()
 	float turnSpeed = FMath::Clamp<float>(delta, -1, 1);
 	float turnDelta = turnSpeed * 10 * GetWorld()->DeltaTimeSeconds;
 	float newRotate = turnDelta + startRotate.Yaw;
-	TurretSM->SetWorldRotation(FRotator(startRotate.Pitch, newRotate, startRotate.Roll));
+	//TurretSM->SetWorldRotation(FRotator(startRotate.Pitch, newRotate, startRotate.Roll));
+	TurretSM->AddLocalRotation(FRotator(0,turnDelta,0));
 }
 
 void UMyTankComponent::TurnBarrel()
@@ -86,4 +88,50 @@ void UMyTankComponent::TurnBarrel()
 	newRotate=newRotate-TurretSM->GetForwardVector().Rotation().Pitch;
 	newRotate = FMath::Clamp<float>(newRotate, -30, 30);
 	BarrelSM->SetRelativeRotation(FRotator(newRotate, 0, 0));
+}
+
+void UMyTankComponent::AimToTarget()
+{
+	if (GetRayHitLocation(TargetPosition))
+	{
+		//tankIns->FindComponentByClass<UMyTankComponent>()->AimAt(TargetPosition);
+		AimAt(TargetPosition);
+	}
+}
+
+bool UMyTankComponent::GetRayHitLocation(FVector& outVector)
+{
+	int32 ViewX, ViewY;
+
+	GetWorld()->GetFirstPlayerController()->
+	GetViewportSize(ViewX, ViewY);
+
+	FVector position;
+	FVector rotation;
+
+	GetWorld()->GetFirstPlayerController()->
+	DeprojectScreenPositionToWorld(ViewX * 0.5f, ViewY * 0.5f, position, rotation);
+	return GetLookHitRotation(rotation, outVector);
+}
+
+bool UMyTankComponent::GetLookHitRotation(FVector direction, FVector& outVector)
+{
+	FHitResult hitR;
+	if (GetWorld()->LineTraceSingleByChannel(
+		hitR,
+		GetWorld()->GetFirstPlayerController()->
+		PlayerCameraManager->GetCameraLocation(),
+		GetWorld()->GetFirstPlayerController()->
+		PlayerCameraManager->GetCameraLocation() + direction * 10000,
+		ECC_Visibility
+	))
+	{
+		outVector = hitR.Location;
+		if (hitR.GetActor() != nullptr)
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Yellow, hitR.GetActor()->GetName());
+		}
+		return true;
+	}
+	return false;
 }

@@ -6,7 +6,6 @@
 #include "Components/ActorComponent.h"
 #include "MyTankComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class UEDEMOC_API UMyTankComponent : public UActorComponent
 {
@@ -28,6 +27,9 @@ public:
 	UStaticMeshComponent* BarrelSM;
 	UStaticMeshComponent* BodySM;
 
+	//AMyTank* tankIns;
+
+
 	void AimAt(FVector position);
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
@@ -37,4 +39,16 @@ public:
 
 	void TurnTurret();
 	void TurnBarrel();
+
+
+	// void Tick(float DeltaSeconds) override;
+
+	//virtual void SetPawn(APawn* InPawn) override;
+
+
+	void AimToTarget();
+	FVector TargetPosition;
+
+	bool GetRayHitLocation(FVector& outVector);
+	bool GetLookHitRotation(FVector direction,FVector& outVector);
 };
