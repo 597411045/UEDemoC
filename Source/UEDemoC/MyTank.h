@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Runtime/Engine/Classes/Components/BoxComponent.h"
 #include "MyTank.generated.h"
 
 UCLASS()
@@ -34,5 +35,21 @@ public:
 	 UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	 int CurHP=MaxHP;
 
-	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	class UMyTankTrackMeshComponent* LTrack;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	class UMyTankTrackMeshComponent* RTrack;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UStaticMeshComponent* Turret;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UStaticMeshComponent* Barrel;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UStaticMeshComponent* Body;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	UBoxComponent* Root;
 };

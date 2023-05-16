@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "MyTankComponent.generated.h"
+#include "MyTankActionActorComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class UEDEMOC_API UMyTankComponent : public UActorComponent
+class UEDEMOC_API UMyTankActionActorComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UMyTankComponent();
+	UMyTankActionActorComponent();
 
 protected:
 	// Called when the game starts

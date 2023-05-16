@@ -1,12 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "MyTankComponent.h"
+#include "MyTankActionACtorComponent.h"
 
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
-UMyTankComponent::UMyTankComponent()
+UMyTankActionActorComponent::UMyTankActionActorComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -17,7 +17,7 @@ UMyTankComponent::UMyTankComponent()
 
 
 // Called when the game starts
-void UMyTankComponent::BeginPlay()
+void UMyTankActionActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	TurretSM = Cast<UStaticMeshComponent>(GetOwner()->GetDefaultSubobjectByName(TEXT("Turret")));
@@ -30,7 +30,7 @@ void UMyTankComponent::BeginPlay()
 
 
 // Called every frame
-void UMyTankComponent::TickComponent(float DeltaTime, ELevelTick TickType,
+void UMyTankActionActorComponent::TickComponent(float DeltaTime, ELevelTick TickType,
                                      FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
@@ -39,7 +39,7 @@ void UMyTankComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	// ...
 }
 
-void UMyTankComponent::AimAt(FVector position)
+void UMyTankActionActorComponent::AimAt(FVector position)
 {
 	FVector FireVec;
 	FVector StartLocation = BarrelSM->GetSocketLocation("Projectile");
@@ -56,7 +56,7 @@ void UMyTankComponent::AimAt(FVector position)
 	}
 }
 
-void UMyTankComponent::TurnTurret()
+void UMyTankActionActorComponent::TurnTurret()
 {
 	FRotator startRotate = TurretSM->GetForwardVector().Rotation();
 	FRotator endRotate = (ProEndPositon - ProStartPositon).Rotation();
@@ -76,7 +76,7 @@ void UMyTankComponent::TurnTurret()
 	TurretSM->AddLocalRotation(FRotator(0,turnDelta,0));
 }
 
-void UMyTankComponent::TurnBarrel()
+void UMyTankActionActorComponent::TurnBarrel()
 {
 	FRotator startRotate = BarrelSM->GetForwardVector().Rotation();
 	FRotator endRotate = (ProEndPositon - ProStartPositon).Rotation();
@@ -90,7 +90,7 @@ void UMyTankComponent::TurnBarrel()
 	BarrelSM->SetRelativeRotation(FRotator(newRotate, 0, 0));
 }
 
-void UMyTankComponent::AimToTarget()
+void UMyTankActionActorComponent::AimToTarget()
 {
 	if (GetRayHitLocation(TargetPosition))
 	{
@@ -99,7 +99,7 @@ void UMyTankComponent::AimToTarget()
 	}
 }
 
-bool UMyTankComponent::GetRayHitLocation(FVector& outVector)
+bool UMyTankActionActorComponent::GetRayHitLocation(FVector& outVector)
 {
 	int32 ViewX, ViewY;
 
@@ -114,7 +114,7 @@ bool UMyTankComponent::GetRayHitLocation(FVector& outVector)
 	return GetLookHitRotation(rotation, outVector);
 }
 
-bool UMyTankComponent::GetLookHitRotation(FVector direction, FVector& outVector)
+bool UMyTankActionActorComponent::GetLookHitRotation(FVector direction, FVector& outVector)
 {
 	FHitResult hitR;
 	if (GetWorld()->LineTraceSingleByChannel(
