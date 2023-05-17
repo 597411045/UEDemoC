@@ -3,7 +3,13 @@
 /Binaries/*
 /Intermediate/*
 /DerivedDataCache/*
+
 /Plugins/*
+!/Plugins/TSlate/
+/Plugins/TSlate/*
+!/Plugins/TSlate/Source/
+!/Plugins/TSlate/TSlate.uplugin
+
 /Content/*
 !/Content/Assets/
 -/Content/Assets/
