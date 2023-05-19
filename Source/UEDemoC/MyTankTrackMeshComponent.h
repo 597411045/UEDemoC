@@ -24,7 +24,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetThrottle(float param);
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float throttle = 0;
-	float maxForce = 1;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float maxForce = 1000000;
 };

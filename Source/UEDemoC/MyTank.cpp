@@ -18,18 +18,19 @@ AMyTank::AMyTank()
 	//static ConstructorHelpers::FObjectFinder<UStaticMesh> TurretSM(TEXT("StaticMesh '/Game/Assets/TMPRES/Tank/tank_fbx_Barrel'"));
 	//UStaticMeshComponent::SetStaticMesh(TurretSM.Object);
 
-	Root = CreateDefaultSubobject<UBoxComponent>("Root");
-	Root->SetSimulatePhysics(true);
-	Root->SetEnableGravity(true);
-	Root->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	SetRootComponent(Root);
+	// Root = CreateDefaultSubobject<UBoxComponent>("Root");
+	// Root->SetSimulatePhysics(true);
+	// Root->SetEnableGravity(true);
+	// Root->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	// SetRootComponent(Root);
 	
 	Body = CreateDefaultSubobject<UStaticMeshComponent>("Body");
-	Body->SetupAttachment(Root);
+	//Body->SetupAttachment(Root);
 	Body->SetStaticMesh(Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), nullptr,
 	                                                       TEXT(
 		                                                       "StaticMesh'/Game/Assets/TMPRES/Tank/tank_fbx_Body.tank_fbx_Body'"))));
-
+	SetRootComponent(Root);
+	
 	Turret = CreateDefaultSubobject<UStaticMeshComponent>("Turret");
 	//Turret->SetupAttachment(Body,TEXT("Turret"));
 	Turret->AttachToComponent(Body, FAttachmentTransformRules::SnapToTargetIncludingScale,TEXT("Turret"));

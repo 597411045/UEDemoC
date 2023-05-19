@@ -26,6 +26,7 @@ void UMyTankNavMovementComponent::MoveForward(float throttle)
 
 void UMyTankNavMovementComponent::TurnRight(float throttle)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Yellow, *FString::SanitizeFloat(throttle));
 	LTrack->SetThrottle(throttle);
 	RTrack->SetThrottle(-throttle);
 }

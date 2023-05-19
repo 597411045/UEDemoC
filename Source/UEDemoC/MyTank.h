@@ -7,6 +7,7 @@
 #include "Runtime/Engine/Classes/Components/BoxComponent.h"
 #include "MyTank.generated.h"
 
+class UMyTankTrackMeshComponent;
 UCLASS()
 class UEDEMOC_API AMyTank : public APawn
 {
@@ -36,10 +37,10 @@ public:
 	 int CurHP=MaxHP;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	class UMyTankTrackMeshComponent* LTrack;
+	UMyTankTrackMeshComponent* LTrack;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
-	class UMyTankTrackMeshComponent* RTrack;
+	UMyTankTrackMeshComponent* RTrack;
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite)
 	UStaticMeshComponent* Turret;
